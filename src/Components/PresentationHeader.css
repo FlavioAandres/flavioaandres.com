@@ -1,0 +1,57 @@
+.presentation-header-container{
+    margin: 20px auto;
+    display: flex;
+    width: 90%;
+    color: rgb(211, 208, 208);
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+.social-networks{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.social-networks a{
+    border-radius: 4px;
+    height: 30px;
+    border: 2px solid; 
+    padding: 1px 10px 2px 10px;
+    margin-right: 5px;
+    margin-top: 5px;
+    vertical-align: center;
+    /* font-size: .9rem; */
+}
+
+.social-networks .twitter{border-color: #00acee;}
+.social-networks .instagram{border-color: #c01515 ;}
+.social-networks .medium{border-color: #66cdaa;}
+.social-networks .github{border-color: rgb(180, 180, 180);}
+
+.presentation-header-container .namming{
+    text-align: left;
+}
+
+.presentation-header-container .namming h2{
+    margin-bottom: 0px;
+}
+.presentation-header-container .namming h4{
+    margin-top: 0px;
+}
+
+@media (max-width: 992px){
+    .presentation-header-container{
+        flex-direction: column;
+        width: 80%;
+
+    }
+    .presentation-header-container .namming h2{
+        font-size: 1.8rem;
+    }
+    .presentation-header-container .namming h4{
+        font-size: 1.1rem;
+    }
+    .social-networks a{
+        font-size: .9rem;
+    }
+}

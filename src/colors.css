@@ -1,0 +1,21 @@
+.primary-color{
+    color: #1D596B;
+}
+.secondary-color{
+    color: #203238; 
+}
+.third-color{
+    color: #3D606B; 
+}
+
+.light-color{
+    color: rgb(239, 239, 255)
+}
+
+.dark-color{
+    color: #03050d;
+}
+
+.dark-background{
+    background-color: #020615;
+}
