@@ -5,8 +5,8 @@
     margin: 10px; 
     display: flex;
     flex-direction: row;
-    border: 2px solid #011124;
-    box-shadow:0 0 10px 2px #03050d;
+    outline: 2px solid #011124;
+    box-shadow:0 0 10px 3px #03050d;
 }
 
 .thumbnail-image img{
@@ -76,6 +76,9 @@
     .item-container{
         width: 300px;
     }
+    .item-header h3{
+        margin: 15px;
+    }
 }
 
 /* Laptop S */
@@ -88,7 +91,6 @@
     }
     .item-header h3{
         font-size: 1.1rem;
-        margin: 0px; 
     }
     .item-body p{
         font-size: .7rem;

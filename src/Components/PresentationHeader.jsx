@@ -6,7 +6,7 @@ const PresentationHeader = (props)=>{
         <div className="presentation-header-container">
             <div className="namming">
                 <h2>FlavioAandres</h2>
-                <h4>Web developer</h4>
+                <h4>⭐Web developer</h4>
             </div>
             <div className="social-networks">
                 <a className="twitter">Twitter</a>

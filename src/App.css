@@ -11,26 +11,20 @@
   justify-items: center;
 }
 
-.content-blogs{
-  padding: 10px;
-  margin: 0px auto;
-  justify-content: center;
-  display: flex;
-  width: 97%;
-  flex-wrap: wrap;
-}
+
 
 a{
   text-decoration: none;
   color: white;
   display: inline-block;
 }
+
 h5{
   margin: 0px;
 }
 
 .navbar-container{
-  height: 5rem;
+  height: 4rem;
   box-shadow: 0px 0px 10px 0px #0f0d1d;
 }
 
@@ -44,8 +38,52 @@ h5{
   color: white;
 }
 
-@media (max-width: 992px){
+.content-blogs{
+  padding: 10px;
+  margin: 0px auto;
+  display: flex;
+  min-width: 80%;
+  max-width: 96%;
+  flex-wrap: wrap;
+  transition: ease-in .2s all;
+  opacity: 100%;
+}
 
+.content-type-container{
+  display: flex;
+  margin: 0px auto; 
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.hidden-content{
+  opacity: 0%;
+}
+.content-type-container button{
+  background: none;
+  font-size: 1.1rem;
+  border: none;
+  margin: 5px 10px; 
+  outline: none;
+  color: rgb(53, 107, 243); 
+  cursor: pointer;
+}
+.content-type-container button.selected{
+  color: white; 
+  cursor: auto;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.content-type-container button:focus{
+  outline: none;
+}
+
+/*phones*/
+@media (max-width: 992px){
+  .content-blogs{
+    width: 87%;
+  }
   .navbar-collapse.show .navbar-nav{
     background: linear-gradient(0deg, #030921 0%, #020615 100%);
     box-shadow: 0px 10px 13px -6px #06154e;
@@ -54,9 +92,19 @@ h5{
 
 }
 
+/*tablets*/
 @media (max-width: 768px){
   .content-blogs{
-    /* justify-content: flex-start; */
     justify-items: center;
+  }
+}
+
+/*Laptop S*/
+@media (max-width: 1024px){
+}
+/*Laptop L*/
+@media (min-width: 1440px){
+  .content-blogs{
+    width: 85%;
   }
 }
