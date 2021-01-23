@@ -48,28 +48,27 @@
     overflow: hidden;
 }
 
-/* phones */
-@media (max-width: 992px){
-    .item-container{
-        height: 80px;
-        width: 380px;
-    }
-    .thumbnail-image img{
-        border-radius: 4px 0px 0px 4px;
-        width: 80px;
-    }
-    .item-header{
-        height: 100%;
-        max-height: 100%;
-    }
-    .item-header h3{
-        font-size: 1rem;
-        margin: 0px; 
-    }
-    .item-body{
-        display: none;
-    }
+
+
+/*
+    ITEM VIDEO 
+*/
+
+.item-video-container{
+    height: 140px ;
+    width: 250px;
+    margin: 10px;
+    
 }
+
+.item-video-container img{
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px #000000;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
 
 /* tablets */
 @media (max-width: 768px){
@@ -90,10 +89,35 @@
         padding: 2px 5px;
     }
     .item-header h3{
+        margin: 5px; 
         font-size: 1.1rem;
     }
     .item-body p{
         font-size: .7rem;
 
+    }
+}
+
+
+/* phones */
+@media (max-width: 425px){
+    .item-container{
+        height: 80px;
+        width: 380px;
+    }
+    .thumbnail-image img{
+        border-radius: 4px 0px 0px 4px;
+        width: 80px;
+    }
+    .item-header{
+        height: 100%;
+        max-height: 100%;
+    }
+    .item-header h3{
+        font-size: 1rem;
+        margin: 5px 10px; 
+    }
+    .item-body{
+        display: none;
     }
 }

@@ -1,10 +1,11 @@
 import React from "react";
 
 const Navbar = (props) => {
+  const imagebrand = 'favicon.ico'
   return (
     <nav className="navbar navbar-expand-lg navbar-container dark-background">
       <a class="navbar-brand" href="#">
-        FlavioAandres
+        <img src={imagebrand} alt="" srcset=""/>
       </a>
       <button
         class="navbar-toggler"
@@ -21,17 +22,7 @@ const Navbar = (props) => {
         <ul className="navbar-nav">
           <li className="nav-item">
             <a href="" className="nav-link">
-              Home
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="" className="nav-link">
               About Me
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="" className="nav-link">
-              Blog
             </a>
           </li>
         </ul>
