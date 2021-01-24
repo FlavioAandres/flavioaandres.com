@@ -1,29 +1,43 @@
 'use strict';
-const axios = require('axios')
+const RssCollector = require('./src/rss_repo')
 const mongodb = require('./src/mongodb')
 const { stripHtml } = require("string-strip-html");
-const FEED_COLLECTOR_URL = "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/"
-
 const normalize = (text)=> stripHtml(text.normalize().replace(/\n/ig, '')).result
 
-module.exports.mediumCollector = async event => {
-  const BufferResponse = await axios.get(FEED_COLLECTOR_URL + "@flavioaandres", {
-    responseType: 'arraybuffer'
-  })
+module.exports.RSSCollector = async event => {
 
-  let BufferResult = Buffer.from(BufferResponse.data, 'utf-8')
-  const { items } = JSON.parse(BufferResult)
+  const MEDIUM_URL = 'https://medium.com/feed/@flavioaandres'
+  const YOUTUBE_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=UCP4CvAOD2mpAfghyF3IgDVA'
 
-  if(!items) throw new Error('No postings found in Medium Feed')
+  const [MediumPosts, YoutubeVideos] = await Promise.all([
+    RssCollector.GetItemsFromRSS(MEDIUM_URL),
+    RssCollector.GetItemsFromRSS(YOUTUBE_URL)
+  ])
+
+  if(!MediumPosts && !YoutubeVideos) 
+    throw new Error('No postings found in Medium or Youtube Feed')
   
-  const itemsToSave = items.filter(item=>item.categories.length)
+  
+  // Map Medium Posts
+  const itemsToSave = MediumPosts.filter(item=>item.categories.length)
   .map(publicaiton=>({
     title: normalize(publicaiton.title), 
     description: normalize(publicaiton.description),
     thumbnail: publicaiton.thumbnail, 
     url: publicaiton.guid,
+    category: "POSTS"
   }))
-  if(!itemsToSave) return console.log('No items to save :) ')
+
+  //Youtube posts 
+  YoutubeVideos.forEach(video=>{
+    itemsToSave.push({
+      title: normalize(video.title), 
+      description: normalize(video.description),
+      thumbnail: video.thumbnail, 
+      url: video.link,
+      category: "VIDEO"
+    })
+  })
 
   const db = (await mongodb.connect()).connection
   const bulk = db.collection('blogposts').initializeUnorderedBulkOp();
@@ -39,12 +53,15 @@ module.exports.mediumCollector = async event => {
 };
 
 
-module.exports.getMediumPosts =async ()=>{
+module.exports.getRSSData =async ()=>{
   const db = (await mongodb.connect()).connection
   const MediumResults = await db.collection('blogposts').find({}).toArray()
   await mongodb.destroy()
   return {
     statusCode: 200, 
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     body: JSON.stringify(MediumResults)
   }
 }

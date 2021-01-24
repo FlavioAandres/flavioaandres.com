@@ -1,0 +1,22 @@
+.content-about-me{
+    color: white; 
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.content-about-me p{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+.content-about-me span{
+    color: tomato;
+    font-weight: 400;
+}
+
+.content-about-me p strong{
+    color: rgb(161, 161, 161); 
+}

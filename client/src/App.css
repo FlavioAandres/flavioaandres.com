@@ -41,11 +41,12 @@ h5{
 
 .content-videos, .content-blogs{
   padding: 10px;
-  opacity: 100%;
+  opacity: 100;
 }
 .content-blogs{
   display: flex;
   max-width: 100vw;
+  min-width: 80vw;
   justify-content: center;
   margin: 0px auto;
   flex: 0 0 33.333333%;
@@ -71,6 +72,7 @@ h5{
   outline: none;
   color: rgb(53, 107, 243); 
   cursor: pointer;
+  transition: all ease 200ms;
 }
 .content-type-container button.selected{
   color: white; 
@@ -86,7 +88,7 @@ h5{
 /*phones*/
 @media (max-width: 992px){
   .content-blogs{
-    /* width: 87%; */
+    width: 87%;
   }
   .navbar-collapse.show .navbar-nav{
     background: linear-gradient(0deg, #030921 0%, #020615 100%);

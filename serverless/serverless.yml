@@ -10,18 +10,20 @@ provider:
   runtime: nodejs12.x
 
 functions:
-  MediumCollector:
-    handler: handler.mediumCollector
-  GetMediumPosts:
-    handler: handler.getMediumPosts
+  RSSCollector:
+    handler: handler.RSSCollector
+    events: 
+      - schedule: 
+          rate: 'rate(12 hours)'
+  GetEntities:
+    handler: handler.getRSSData
     events: 
       - http:
           path: /posts
           method: GET
           cors:
-            - enabled: true
-            - origin: "'*'"
-            - headers: "Access-Control-Allow-Origin"
+            origin: "*"
+            headers: "Access-Control-Allow-Origin"
           response:
             headers:
-              Access-Control-Allow-Origin: "'*'"
+              Access-Control-Allow-Origin: "*"

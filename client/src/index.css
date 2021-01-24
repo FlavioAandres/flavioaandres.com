@@ -1,5 +1,15 @@
 * { padding: 0; margin: 0; }
-
+a {
+  text-decoration: none;
+}
+a:focus{
+  text-decoration: none;
+  color: white; 
+}
+a:hover{
+  text-decoration: none;
+  color: white; 
+}
 html,body, #root{
   background-color: #03050d;
   height:100%;

@@ -9,10 +9,10 @@ const PresentationHeader = (props)=>{
                 <h4>⭐Web developer</h4>
             </div>
             <div className="social-networks">
-                <a className="twitter">Twitter</a>
-                <a className="medium">Medium</a>
-                <a className="github">Github</a>
-                <a className="instagram">Instagram</a>
+                <a href="https://twitter.com/FlavioAandres" className="twitter">🦅Twitter</a>
+                <a href="https://flavioaandres.medium.com" className="medium">📖Medium</a>
+                <a href="https://github.com/FlavioAandres" className="github">🐙Github</a>
+                <a href="https://instagram.com/flavioaandres_"className="instagram">📷Instagram</a>
             </div>
         </div>
     )

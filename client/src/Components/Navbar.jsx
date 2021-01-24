@@ -1,12 +1,15 @@
 import React from "react";
+import { useLocation, Link } from "react-router-dom";
 
 const Navbar = (props) => {
-  const imagebrand = 'favicon.ico'
+  const location = useLocation();
+
+  const imagebrand = "favicon.ico";
   return (
     <nav className="navbar navbar-expand-lg navbar-container dark-background">
-      <a class="navbar-brand" href="#">
-        <img src={imagebrand} alt="" srcset=""/>
-      </a>
+      <Link class="navbar-brand" to="/">
+        <img src={imagebrand} alt="" srcset="" />
+      </Link>
       <button
         class="navbar-toggler"
         type="button"
@@ -18,12 +21,18 @@ const Navbar = (props) => {
       >
         <i class="fas fa-ellipsis-h"></i>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav">
+      <div
+        style={{
+          justifyContent: "flex-end",
+        }}
+        className="collapse navbar-collapse"
+        id="navbarNav"
+      >
+        <ul className="navbar-nav ">
           <li className="nav-item">
-            <a href="" className="nav-link">
-              About Me
-            </a>
+            <Link to={location.pathname === "/about" ? "/" : "/about"} className="nav-link">
+              {location.pathname === "/about" ? "Home" : "About me"}
+            </Link>
           </li>
         </ul>
       </div>
@@ -31,4 +40,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar
+export default Navbar;

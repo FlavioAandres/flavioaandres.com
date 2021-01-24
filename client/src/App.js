@@ -1,13 +1,13 @@
 import React from "react";
-import "./App.css";
-import Item from "./Components/PostItem";
-import VideoItem from "./Components/VideoItem";
-import Navbar from "./Components/Navbar.jsx";
-import ProsentationHeader from "./Components/PresentationHeader.jsx";
-import "./colors.css";
-import { URL_FLAVIOAANDRES_API, REACT_ENV } from "./constants";
 import Axios from "axios";
-
+import Navbar from "./Components/Navbar.jsx";
+import AboutMe from "./Containers/AboutMe";
+import ContentPosts from "./Containers/content-posts";
+import { URL_FLAVIOAANDRES_API, REACT_ENV } from "./constants";
+import ProsentationHeader from "./Components/PresentationHeader.jsx";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "./App.css";
+import "./colors.css";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -36,58 +36,52 @@ class App extends React.Component {
     this.requestBlogs();
   }
 
-  requestBlogs = async () =>{
+  requestBlogs = async () => {
     try {
-      const response = await Axios.get(URL_FLAVIOAANDRES_API + `/${REACT_ENV}/posts`)
+      const { data } = await Axios.get(
+        URL_FLAVIOAANDRES_API + `/${REACT_ENV}/posts`
+      );
+      const videos = [],
+        posts = [];
+      data.forEach((post) => {
+        if (post.category === "VIDEO") videos.push(post);
+        if (post.category === "POSTS") posts.push(post);
+      });
       this.setState({
-        posts: response.data,
+        posts: posts.slice(0, 6),
+        videos: videos,
       });
     } catch (error) {
-      console.error(error)      
+      console.error(error);
     }
-  }
+  };
 
   render() {
-    const { contentType, hiddenBlogs, posts, hiddenVideo } = this.state;
+    const { contentType, hiddenBlogs, posts, hiddenVideo, videos } = this.state;
     return (
       <div className="App">
-        <Navbar />
-        <ProsentationHeader />
-        <div className="content-type-container">
-          <button
-            onClick={() => this.handleContentType("posts")}
-            className={contentType === "posts" && "selected"}
-          >
-            Posts
-          </button>
-          <button
-            onClick={() => this.handleContentType("video")}
-            className={contentType === "video" && "selected"}
-          >
-            Videos
-          </button>
-        </div>
-        {contentType === "posts" ? (
-          <div
-            className={
-              "content-blogs " + `${hiddenBlogs ? "hidden-content" : ""}`
-            }
-          >
-            {posts.map((pub, idx) => (
-              <Item key={pub._id + idx} {...pub} />
-            ))}
-          </div>
-        ) : (
-          <div
-            className={
-              "content-videos " + `${hiddenVideo ? "hidden-content" : ""}`
-            }
-          >
-            <VideoItem />
-            <VideoItem />
-            <VideoItem />
-          </div>
-        )}
+        <Router path="/">
+          <Navbar/>
+          <ProsentationHeader />
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <ContentPosts
+                {...{
+                  contentType,
+                  hiddenBlogs,
+                  posts,
+                  hiddenVideo,
+                  videos,
+                  hiddenBlogs,
+                  handleContentType: this.handleContentType,
+                }}
+              />
+            )}
+          />
+          <Route exact path="/about" render={() => <AboutMe/>} />
+        </Router>
       </div>
     );
   }
