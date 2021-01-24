@@ -5,6 +5,8 @@ import VideoItem from "./Components/VideoItem";
 import Navbar from "./Components/Navbar.jsx";
 import ProsentationHeader from "./Components/PresentationHeader.jsx";
 import "./colors.css";
+import { URL_FLAVIOAANDRES_API, REACT_ENV } from "./constants";
+import Axios from "axios";
 
 class App extends React.Component {
   constructor(props) {
@@ -12,6 +14,8 @@ class App extends React.Component {
     this.state = {
       contentType: "posts",
       hiddenBlogs: false,
+      posts: [],
+      videos: [],
     };
   }
   handleContentType = (type) => {
@@ -27,8 +31,24 @@ class App extends React.Component {
       120
     );
   };
+
+  componentDidMount() {
+    this.requestBlogs();
+  }
+
+  requestBlogs = async () =>{
+    try {
+      const response = await Axios.get(URL_FLAVIOAANDRES_API + `/${REACT_ENV}/posts`)
+      this.setState({
+        posts: response.data,
+      });
+    } catch (error) {
+      console.error(error)      
+    }
+  }
+
   render() {
-    const { contentType, hiddenBlogs, hiddenVideo } = this.state;
+    const { contentType, hiddenBlogs, posts, hiddenVideo } = this.state;
     return (
       <div className="App">
         <Navbar />
@@ -53,24 +73,20 @@ class App extends React.Component {
               "content-blogs " + `${hiddenBlogs ? "hidden-content" : ""}`
             }
           >
-            <Item />
-            <Item />
-            <Item />
-            <Item />
-            <Item />
-            <Item />
-            <Item />
+            {posts.map((pub, idx) => (
+              <Item key={pub._id + idx} {...pub} />
+            ))}
           </div>
-        ): (
-          <div 
-          className={
-            "content-videos " + `${hiddenVideo ? "hidden-content" : ""}`
-          }>
-            <VideoItem/>
-            <VideoItem/>
-            <VideoItem/>
+        ) : (
+          <div
+            className={
+              "content-videos " + `${hiddenVideo ? "hidden-content" : ""}`
+            }
+          >
+            <VideoItem />
+            <VideoItem />
+            <VideoItem />
           </div>
-
         )}
       </div>
     );
