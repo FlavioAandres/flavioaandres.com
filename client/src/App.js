@@ -48,8 +48,8 @@ class App extends React.Component {
         if (post.category === "POSTS") posts.push(post);
       });
       this.setState({
-        posts: posts.slice(0, 6),
-        videos: videos,
+        posts,
+        videos,
       });
     } catch (error) {
       console.error(error);
